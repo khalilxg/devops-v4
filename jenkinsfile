@@ -4,7 +4,7 @@ pipeline {
 
             stage('mv clean & compile') {
           	    steps {
-                    sh 'mvn /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean'
+                    sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean'
                     sh 'mvn compile'
                 }
             }
