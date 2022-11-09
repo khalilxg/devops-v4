@@ -40,6 +40,6 @@ pipeline {
                     withDockerRegistry([ credentialsId: "dockerHub", url: "https://registry.hub.docker.com" ]) {
                     sh 'docker push docker push khalilxg/devops-v4'
                 }
-            }
+            }}
   }
 }
