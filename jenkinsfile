@@ -38,9 +38,8 @@ pipeline {
                     sh 'docker build -t khalilxg/devops-v4 .'
                     sh 'docker push khalilxg/devops-v4'
                     sh 'docker login -u khalilxg -p Onthewall19.'
-                    withDockerRegistry([ credentialsId: "dockerHub", url: "https://registry.hub.docker.com" ]) {
                     sh 'docker push docker push khalilxg/devops-v4'
                 }
-            }}
+            }
   }
 }
