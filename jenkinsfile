@@ -25,7 +25,7 @@ pipeline {
         
        	    stage('Sonarqube') {
           	  steps {
-                    sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean sonar:sonar -Dsonar.projectKey=Timesheet2 -Dsonar.host.url=http://192.168.10.11:9000 -Dsonar.login=admin -Dsonar.password=sonar'
+                    sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean deploy sonar:sonar -Dsonar.projectKey=Timesheet2 -Dsonar.host.url=http://192.168.10.11:9000 -Dsonar.login=admin -Dsonar.password=sonar'
                 }
             }
             stage('Nexus') {
