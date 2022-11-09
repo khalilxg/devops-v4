@@ -35,7 +35,6 @@ pipeline {
             }
             stage('Docker login/build/push/compose') {
           	  steps {
-                    //sh 'docker rmi --force khalilxg/devops-v4'
                     sh 'docker login -u khalilxg -p Onthewall19.'
                     sh 'docker build -t khalilxg/devops-v4 .'
                     sh 'docker push khalilxg/devops-v4'
