@@ -37,8 +37,8 @@ pipeline {
           	  steps {
                     sh 'docker build -t khalilxg/devops-v4 .'
                     sh 'docker push khalilxg/devops-v4'
-                    sh 'docker login -u khalilxg -p Onthewall19.'
-                    sh 'docker push docker push khalilxg/devops-v4'
+                    sh 'docker login -u "khalilxg" -p "Onthewall19." docker.io'
+                    sh 'docker push docker push khalilxg/devops-v4:latest'
                 }
             }
   }
