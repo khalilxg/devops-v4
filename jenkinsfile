@@ -36,7 +36,7 @@ pipeline {
             stage('Docker Build & push') {
           	  steps {
                     sh 'docker build -t khalilxg/devops-v4 .'
-                    sh 'docker push -t khalilxg/devops-v4 .'
+                    sh 'docker push khalilxg/devops-v4 .'
                 }
             }
   }
