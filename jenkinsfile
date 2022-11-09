@@ -1,7 +1,7 @@
 pipeline {  
     environment {
         registry = "khalilxg/devops-v4"
-        registryCredential = 'Yourdockerhub_id'
+        registryCredential = 'khalilxg'
         dockerImage = ''
             }
     agent any  
