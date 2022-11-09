@@ -39,10 +39,11 @@ pipeline {
                     sh 'docker push khalilxg/devops-v4'
                 }
             }
-             stage('Push Image') {
+            
+            stage('Push Image') {
                     withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-                    sh "docker push docker push khalilxg/devops-v4"
-                    }
-        }
+                    sh 'docker push docker push khalilxg/devops-v4'
+                }
+            }
   }
 }
