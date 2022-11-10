@@ -71,8 +71,8 @@ pipeline {
             }
             stage('Docker compose') {
             steps{
-                //sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --force-recreate --abort-on-container-exit"
-                sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --force-recreate --abort-on-container-exit"
+                //sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
 
             }
             }
