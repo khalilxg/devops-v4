@@ -12,13 +12,13 @@ pipeline {
     agent any  
     stages {  
 
-            stage('mv clean & compile') {
+            stage('mvn clean & compile') {
           	    steps {
                     sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean'
                     sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml compile'
                 }
             }
-            stage ('Build') {  
+            stage ('mvn Build') {  
                   steps{
                     sh """mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean"""
                     sh """mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml package"""
@@ -26,7 +26,7 @@ pipeline {
                     
                 } 
             }
-            stage ('Test') {  
+            stage ('mvn Junit Test') {  
                   steps{
                     sh """mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml test"""
                     echo "test successful";
@@ -71,7 +71,9 @@ pipeline {
             }
             stage('Docker compose') {
             steps{
-                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --force-recreate --abort-on-container-exit"
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml build"
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up"
+
                 //sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
 
             }
