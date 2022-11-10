@@ -56,7 +56,7 @@ pipeline {
                 script {
                 docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
-                    dockerImage.push('latest')
+                    //dockerImage.push('latest')
 
                 }
                 }
@@ -65,7 +65,7 @@ pipeline {
             stage('Remove Unused docker image') {
             steps{
                 sh "docker rmi $imagename:"
-                sh "docker rmi $imagename:latest"
+                //sh "docker rmi $imagename:latest"
 
             }
             }
