@@ -1,6 +1,6 @@
 pipeline { 
   environment {
-    imagename = "khalilxg/devops-v4"
+    imagename = "khalilxg/dooo"
     registryCredential = 'dockerHub'
     dockerImage = ''
   }
