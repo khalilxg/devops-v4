@@ -1,5 +1,9 @@
 pipeline { 
-
+  environment {
+    imagename = "khalilxg/devops-v4"
+    registryCredential = 'dockerHub'
+    dockerImage = ''
+  }
     agent any  
     stages {  
 
@@ -34,17 +38,30 @@ pipeline {
                     sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=0.0.2-SNAPSHOT -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.10.11:8081/repository/maven-snapshots/ -Dfile=target/tpAchatProject-0.0.2-SNAPSHOT.jar -Dnexus.login=admin -Dnexus.password=esprit'
                 }
             }
-            stage('Docker login/build/push/compose') {
-          	  steps {
-                    sh 'docker rmi --force khalilxg/devops-v4'
-                    sh 'docker login -u khalilxg -p Onthewall19.  https://registry.hub.docker.com'
-                    //sh 'docker build --no-cache -t khalilxg/devops-v4 .'
-                    //sh 'docker push khalilxg/devops-v4'
-                    sh 'docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml build'
-                    sh 'docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --abort-on-container-exit'
-                    sh 'docker rmi $registry:$BUILD_NUMBER'
-                    echo "Dockerizing successfully"
-                }
-            }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build imagename + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+            dockerImage.push('latest')
+
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+         sh "docker rmi $imagename:latest"
+
+      }
+    }
   }
 }
