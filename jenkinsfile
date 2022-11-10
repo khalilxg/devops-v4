@@ -72,7 +72,7 @@ pipeline {
             stage('Docker compose up & push') {
             steps{
                 sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml build"
-                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up"
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml push"
                 //sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
 
             }
