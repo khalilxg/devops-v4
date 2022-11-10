@@ -43,44 +43,44 @@ pipeline {
                     sh 'mvn -f /var/lib/jenkins/workspace/devops-v2/Devops_TP_achat-main/pom.xml clean package deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=0.0.2-SNAPSHOT -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.10.11:8081/repository/maven-snapshots/ -Dfile=target/tpAchatProject-0.0.2-SNAPSHOT.jar -Dnexus.login=admin -Dnexus.password=esprit'
                 }
             }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
+            stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $imagename:$BUILD_NUMBER"
+                sh "docker rmi $imagename:latest"
 
-      }
-    }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build imagename + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-            dockerImage.push('latest')
+            }
+            }
+            stage('Building image') {
+            steps{
+                script {
+                dockerImage = docker.build imagename + ":$BUILD_NUMBER"
+                }
+            }
+            }
+            stage('Deploy Image') {
+            steps{
+                script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    dockerImage.push('latest')
 
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
+                }
+                }
+            }
+            }
+            stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $imagename:$BUILD_NUMBER"
+                sh "docker rmi $imagename:latest"
 
-      }
-    }
-    stage('Docker compose') {
-      steps{
-        sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --force-recreate --abort-on-container-exit"
-        sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
+            }
+            }
+            stage('Docker compose') {
+            steps{
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --force-recreate --abort-on-container-exit"
+                sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
 
-      }
-    }
+            }
+            }
   }
 }
