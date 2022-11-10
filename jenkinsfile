@@ -5,7 +5,7 @@ pipeline {
         }
     }
   environment {
-    imagename = "khalilxg/dooo"
+    imagename = "khalilxg/doooo"
     registryCredential = 'dockerHub'
     dockerImage = ''
   }
