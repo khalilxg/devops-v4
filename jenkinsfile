@@ -38,8 +38,8 @@ pipeline {
           	  steps {
                     sh 'docker rmi --force khalilxg/devops-v4'
                     sh 'docker login -u khalilxg -p Onthewall19.  https://registry.hub.docker.com'
-                    sh 'docker build --no-cache -t khalilxg/devops-v4 .'
-                    sh 'docker push khalilxg/devops-v4'
+                    //sh 'docker build --no-cache -t khalilxg/devops-v4 .'
+                    //sh 'docker push khalilxg/devops-v4'
                     sh 'docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml build'
                     sh 'docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up --abort-on-container-exit'
                     sh 'docker rmi $registry:$BUILD_NUMBER'
