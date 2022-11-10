@@ -69,12 +69,17 @@ pipeline {
 
             }
             }
-            stage('Docker compose & running app') {
+            stage('Docker compose up & push') {
             steps{
                 sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml build"
                 sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up"
-                sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
+                //sh "docker-compose -f/var/lib/jenkins/workspace/devops-v2/docker-compose.yml down -v"
 
+            }
+            }
+            stage('Docker compose running app') {
+            steps{
+                sh "docker-compose -f /var/lib/jenkins/workspace/devops-v2/docker-compose.yml up"
             }
             }
   }
